@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net5</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <RepositoryUrl>https://github.com/anotherlongname/Cogent.IoC</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Version>0.0.1-preview1</Version>
   </PropertyGroup>
 
 	<ItemGroup>
