@@ -10,10 +10,10 @@ namespace Cogent.IoC.Generators
 {
     internal class ContainerClassContentGenerator
     {
-        private readonly SourceGeneratorContext _context;
+        private readonly GeneratorExecutionContext _context;
         private readonly RegistrationSymbols _registrationSymbols;
 
-        public ContainerClassContentGenerator(SourceGeneratorContext context, RegistrationSymbols registrationSymbols)
+        public ContainerClassContentGenerator(GeneratorExecutionContext context, RegistrationSymbols registrationSymbols)
         {
             _context = context;
             _registrationSymbols = registrationSymbols;
@@ -60,7 +60,7 @@ namespace Cogent.IoC.Generators
         private DependencyNode ProduceNode(Registration node, DependencyGraph dependencyGraph)
             => TryProduceNode(node, dependencyGraph)
                 .Match(
-                    node => node, 
+                    n => n, 
                     () => throw new System.Exception($"Failed to resolve dependencies for {node.Service().FullyQualifiedTypeName()}"));
 
         // TODO : Uses recursion. Should use a stack (queue?) instead
