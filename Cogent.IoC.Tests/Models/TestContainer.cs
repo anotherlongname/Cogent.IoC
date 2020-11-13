@@ -7,7 +7,7 @@ using Cogent.IoC;
 
 namespace Cogent.IoCTests.Models
 {
-    [ConstructorFor(typeof(ITransientClass))]
+	[ConstructorFor(typeof(ITransientClass))]
     [ConstructorFor(typeof(ISingletonClass))]
     [ConstructorFor(typeof(StringDelegate))]
     [ConstructorFor(typeof(MultiConstructorClass))]
@@ -36,5 +36,4 @@ namespace Cogent.IoCTests.Models
         public StringDelegate Create()
             => () => _stringDelegateContents;
     }
-
 }

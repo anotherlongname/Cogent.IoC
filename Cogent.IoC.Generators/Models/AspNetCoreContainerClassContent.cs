@@ -12,13 +12,14 @@
         }
 
         public string AsString() => $@"
+#nullable enable
 using System;
 
 namespace {_namespace}
 {{
     public partial class {_className}
     {{
-        private {_className}(Func<IServiceProvider> getServiceProvider)
+        private {_className}(Func<IServiceProvider?> getServiceProvider)
             : base(getServiceProvider)
         {{
         }}
@@ -28,9 +29,9 @@ namespace {_namespace}
             public static ServiceProviderFactory Create()
                 => new ServiceProviderFactory(sp => new {_className}(sp));
 
-            private readonly Func<Func<IServiceProvider>, {_className}> _containerConstructor;
+            private readonly Func<Func<IServiceProvider?>, {_className}> _containerConstructor;
 
-            private ServiceProviderFactory(Func<Func<IServiceProvider>, {_className}> containerConstructor)
+            private ServiceProviderFactory(Func<Func<IServiceProvider?>, {_className}> containerConstructor)
             {{
                 _containerConstructor = containerConstructor;
             }}
@@ -40,9 +41,9 @@ namespace {_namespace}
 
             public IServiceProvider CreateServiceProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection services)
             {{
-                IServiceProvider serviceProvider = null;
+                IServiceProvider? serviceProvider = null;
 
-                var container = _containerConstructor(() => serviceProvider);
+                var container = _containerConstructor.Invoke(() => serviceProvider);
 
                 foreach (var service in container.RegisteredServiceTypes())
                 {{
@@ -52,7 +53,8 @@ namespace {_namespace}
                 }}
 
                 serviceProvider = Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(services);
-                return serviceProvider;
+                return serviceProvider ??
+                    throw new Exception(""Failed to build Service Provider"");
             }}
         }}
     }}
