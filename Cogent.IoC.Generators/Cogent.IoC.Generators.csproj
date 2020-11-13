@@ -5,8 +5,9 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/anotherlongname/Cogent.IoC</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>0.0.1-preview2</Version>
-  </PropertyGroup>
+    <Version>0.0.1-preview5</Version>
+		<TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_AddAnalyzersToOutput</TargetsForTfmSpecificContentInPackage>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.8.0" PrivateAssets="all" />
@@ -16,4 +17,11 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Cogent.IoC\Cogent.IoC.csproj" />
 	</ItemGroup>
+
+	<Target Name="_AddAnalyzersToOutput">
+		<ItemGroup>
+			<TfmSpecificPackageFile Include="$(OutputPath)\Cogent.IoC.Generators.dll" PackagePath="analyzers/dotnet/cs" />
+			<TfmSpecificPackageFile Include="$(OutputPath)\Cogent.IoC.dll" PackagePath="analyzers/dotnet/cs" />
+		</ItemGroup>
+	</Target>
 </Project>
