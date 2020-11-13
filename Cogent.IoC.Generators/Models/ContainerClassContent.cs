@@ -24,6 +24,7 @@ namespace Cogent.IoC.Generators.Models
 
         public string AsString()
             => $@"
+#nullable enable
 using System;
 
 namespace {_namespace}
@@ -37,7 +38,7 @@ namespace {_namespace}
             {StringSingletonVariableDeclarations()}
         }}
 
-        public override bool TryResolve(Type serviceType, out object service)
+        public override bool TryResolve(Type serviceType, out object? service)
         {{
             {(_allServiceMethods.Any() ? StringResolveSwitchStatement() : string.Empty)}
             service = default;
@@ -72,7 +73,7 @@ namespace {_namespace}
             => string.Join("\n\t\t\t\t", _allServiceMethods.Select(m => $"case \"{m.ServiceTypeName}\": service = (object){UnwrapNode(m.Dependencies)}; return true;"));
 
         private string StringSingletonVariableDeclarations()
-            => string.Join("\n\t\t\t", _singletonVariableDeclarations.Select(s => $"public {s.SingletonTypeName} __{s.SingletonVariableName};"));
+            => string.Join("\n\t\t\t", _singletonVariableDeclarations.Select(s => $"public {s.SingletonTypeName}? __{s.SingletonVariableName};"));
 
         private string StringServiceConstructorMethods(ServiceConstructor[] serviceConstructors)
             => string.Join("\n\t\t", serviceConstructors.Select(m => $"public {m.ServiceTypeName} {m.ConstructorName}() => {UnwrapNode(m.Dependencies)};"));
