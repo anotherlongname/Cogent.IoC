@@ -6,9 +6,9 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Cogent.IoC.Generators.Extensions
 {
-    internal static class SourceGeneratorContextExtensions
+    internal static class GeneratorExecutionContextExtensions
     {
-        public static ContainerClassDescription[] LocateContainerSymbols(this SourceGeneratorContext context, INamedTypeSymbol containerSymbol)
+        public static ContainerClassDescription[] LocateContainerSymbols(this GeneratorExecutionContext context, INamedTypeSymbol containerSymbol)
         {
             var containerClassGroups = new Dictionary<string, List<ITypeSymbol>>();
 

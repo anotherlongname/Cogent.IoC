@@ -5,10 +5,10 @@ namespace Cogent.IoC.Generators
 {
     internal class AspNetCoreContainerClassContentGenerator
     {
-        private readonly SourceGeneratorContext _context;
+        private readonly GeneratorExecutionContext _context;
         private readonly RegistrationSymbols _registrationSymbols;
 
-        public AspNetCoreContainerClassContentGenerator(SourceGeneratorContext context, RegistrationSymbols registrationSymbols)
+        public AspNetCoreContainerClassContentGenerator(GeneratorExecutionContext context, RegistrationSymbols registrationSymbols)
         {
             _context = context;
             _registrationSymbols = registrationSymbols;

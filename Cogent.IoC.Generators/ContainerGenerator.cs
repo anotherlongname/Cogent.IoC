@@ -11,12 +11,12 @@ namespace Cogent.IoC.Generators
     [Generator]
     internal class ContainerGenerator : ISourceGenerator
     {
-        public void Initialize(InitializationContext context) 
+        public void Initialize(GeneratorInitializationContext context) 
         {
             //System.Diagnostics.Debugger.Launch();
         }
 
-        public void Execute(SourceGeneratorContext context)
+        public void Execute(GeneratorExecutionContext context)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace Cogent.IoC.Generators
         }
 
         // TODO : Remove when possible to peek into generated code
-        private void WriteOutDebugFile(string hintName, string content, SourceGeneratorContext context)
+        private void WriteOutDebugFile(string hintName, string content, GeneratorExecutionContext context)
         {
 #if DEBUG
             try
@@ -57,5 +57,5 @@ namespace Cogent.IoC.Generators
             catch { throw; }
 #endif
         }
-    }
+	}
 }
